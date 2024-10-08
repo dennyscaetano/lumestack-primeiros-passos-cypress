@@ -1,5 +1,4 @@
 class LoginPage {
-
     selectorsList() {
         const selectors = {
             usernameField: "[name='username']",
@@ -20,7 +19,7 @@ class LoginPage {
         cy.get(this.selectorsList().passwordField).type(password)
         cy.get(this.selectorsList().loginButton).click()
     }
-    
+
     checkAccessInvalid() {
         cy.get(this.selectorsList().wrongCredentialAlert)
     }
