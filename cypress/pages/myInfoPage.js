@@ -6,10 +6,11 @@ class MyInfoPage {
             lastNameField: "[name='lastName']",
             gerericField: ".oxd-input--active",
             dateField: "[placeholder='yyyy-dd-mm']",
-            genderRadio: ".oxd-radio-wrapper",
+            secondGenderRadio: ":nth-child(2) > :nth-child(2) > .oxd-radio-wrapper > label > .oxd-radio-input", // Pequeno desafio, alterando radio para "Female"
             dateCloseButton: ".--close",
-            secondItemCombobox: ".oxd-select-dropdown > :nth-child(2)",
-            thirdItemCombobox: ".oxd-select-dropdown > :nth-child(3)",
+            gerericComboboxList: ".oxd-select-text--arrow", // Pequeno desafio, combobox genérico
+            twentySeventhItemComboboxList: ":nth-child(27) > span", // Pequeno desafio, escolhendo 27º item da lista combobox "Brazilian"
+            thirdItemComboboxList: ":nth-child(3) > span", // Pequeno desafio, escolhendo 3º item da lista combobox "Married"
             submitButton: "[type='submit']",
         }
 
@@ -20,7 +21,7 @@ class MyInfoPage {
         cy.get(this.selectorsList().firstNaneField).clear().type(firstName)
         cy.get(this.selectorsList().middleNameField).clear().type(middleName)
         cy.get(this.selectorsList().lastNameField).clear().type(lastName)
-        cy.get(this.selectorsList().gerericField).eq(7).clear().type(birthDate)
+        cy.get(this.selectorsList().dateField).eq(1).clear().type(birthDate)
     }
 
     fillEmployeeDetails(employeeId, otherId) {
@@ -34,17 +35,12 @@ class MyInfoPage {
     }
 
     fillStatus() {
-        //cy.get(this.selectorsList().genderRadio).eq(1).click({ force: true })
-        // cy.get(this.selectorsList().secondItemCombobox).click()
-        // cy.get(this.selectorsList().genericCombobox).eq(1).click({ force: true })
-        // cy.get(this.selectorsList().thirdItemCombobox).click()
+        cy.get(this.selectorsList().secondGenderRadio).click({ force: true })  // Pequeno desafio, alterando radio para "Female"
+        cy.get(this.selectorsList().gerericComboboxList).eq(0).click({ force: true }) // Pequeno desafio, abrindo o combobox de "Nationality"
+        cy.get(this.selectorsList().twentySeventhItemComboboxList).click({ force: true }) // Pequeno desafio, escolhendo o 27º item da lista combobox "Brazilian" 
+        cy.get(this.selectorsList().gerericComboboxList).eq(1).click({ force: true }) // Pequeno desafio, abrindo o combobox de "Marital Status"
+        cy.get(this.selectorsList().thirdItemComboboxList).click({ force: true }) // Pequeno desafio, escolhendo o 3º item da lista combobox "Married" 
     }
-
-
-        //cy.get(this.selectorsList().dateCloseButton).click()
-        //cy.get(this.selectorsList().gerericField).eq(8).clear().type('ssnNumberTest') // Campo retirado do formulário
-        //cy.get(this.selectorsList().gerericField).eq(9).clear().type('sinNumberTest') // Campo retirado do formulário
-    
 
     saveForm() {
         cy.get(this.selectorsList().submitButton).eq(0).click({ force: true })
